@@ -4,5 +4,5 @@ from .player import Player
 
 @dataclass(frozen=True)
 class Pair:
-	id: str
+	id: int
 	players: Tuple[Player, Player]
