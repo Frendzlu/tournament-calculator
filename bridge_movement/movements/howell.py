@@ -5,7 +5,7 @@ from .generator import MovementGenerator
 
 class HowellMovement(MovementGenerator):
 	"""
-	Standalone Howell movement generator inheriting shared helpers.
+	Standalone Howell movements generator inheriting shared helpers.
 	"""
 
 	def __init__(self, num_pairs: int):

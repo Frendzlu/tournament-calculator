@@ -4,7 +4,7 @@ from .table import Table
 from bridge_movement.core import BoardGroup
 
 if TYPE_CHECKING:
-    from bridge_movement.movement import BaseMovement
+    from bridge_movement.movements import BaseMovement
 
 
 class Sector:
@@ -18,7 +18,7 @@ class Sector:
         self.min_boards = 0
 
     def set_movement(self, movement_cls: Type['BaseMovement']):
-        # Store the movement class for later instantiation by code that knows the
+        # Store the movements class for later instantiation by code that knows the
         # appropriate constructor signature.
         self.movement_cls = movement_cls
 

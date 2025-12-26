@@ -2,7 +2,7 @@ from typing import List, Tuple
 from bridge_movement.core import Position
 from bridge_movement.tournament.table import Table
 
-class MovStrat:
+class MovementStrategy:
     """
     Movement strategy container.
 

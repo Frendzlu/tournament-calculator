@@ -1,5 +1,6 @@
 from typing import Dict, Tuple, List, TYPE_CHECKING
 
+from .strategy import MovementStrategy
 from bridge_movement.core import Position, Pair, BoardGroup
 
 if TYPE_CHECKING:
@@ -12,7 +13,7 @@ class BaseMovement:
     boards: list['BoardGroup']
     pairs: list['Pair']
 
-    def __init__(self, tables: list['Table'], boards: list[BoardGroup], pairs: list[Pair], movement_strategies: MovStrat ):
+    def __init__(self, tables: list['Table'], boards: list[BoardGroup], pairs: list[Pair], movement_strategies: MovementStrategy):
         self.tables = tables
         self.boards = boards
         self.pairs = pairs

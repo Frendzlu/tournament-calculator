@@ -1,11 +1,11 @@
 from collections import deque
 from typing import List
-from .base_movement import MovStrat
+from .strategy import MovementStrategy
 from .generator import MovementGenerator
 
 class MitchellMovement(MovementGenerator):
 	"""
-	Standalone Mitchell movement generator inheriting shared helpers.
+	Standalone Mitchell movements generator inheriting shared helpers.
 	"""
 
 	def __init__(self, num_pairs: int):
