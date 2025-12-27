@@ -81,7 +81,7 @@ class BoardGroupMovement:
             out[i] = group.boards
         return out
 
-
+#this should be returning Board group movements, not individual boards. Mateusz tell me what you think
     def board_movement_between(self, round_a: int, round_b: int) -> Dict[int, Tuple[int, int]]:
         """Return mapping board_number -> (from_table, to_table) between two rounds.
 
