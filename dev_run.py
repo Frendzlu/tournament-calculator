@@ -13,5 +13,5 @@ print('First_Boards r1:', bg.first_board_for_round(1))
 print('Boards for r1:', bg.boards_for_round(1))
 print('First_Boards r2:', bg.first_board_for_round(2))
 print('Boards for r2:', bg.boards_for_round(2))
-print('Movement r1->r2:', bg.board_movement_between(1,2))
+print('Movement r1->r2:', bg.board_group_movement_between(1,2))
 

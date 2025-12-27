@@ -97,16 +97,16 @@ class BoardGroupMovement:
     def board_group_movement_between(self, round_a: int, round_b: int) -> Dict[int, Tuple[int, int]]:
         """Return mapping board_group_id -> (from_table, to_table) between two rounds.
 
-        If a board is not present on any table (e.g. groups shorter than num_tables), it will be omitted.
+        If a board_group is not present on any table (e.g. groups shorter than num_tables), it will be omitted.
         """
         a_map = self.board_group_id_for_round(round_a)
         b_map = self.board_group_id_for_round(round_b)
         inv_a: Dict[int, int] = {b: t for t, b in a_map.items() if b is not None}
         inv_b: Dict[int, int] = {b: t for t, b in b_map.items() if b is not None}
         movement: Dict[int, Tuple[int, int]] = {}
-        for board, from_table in inv_a.items():
-            to_table = inv_b.get(board)
+        for board_group_id, from_table in inv_a.items():
+            to_table = inv_b.get(board_group_id, None)
             if to_table is not None:
-                movement[board] = (from_table, to_table)
+                movement[board_group_id] = (from_table, to_table)
         return movement
 
