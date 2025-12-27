@@ -10,8 +10,8 @@ def test_compute_board_groups():
 
 def test_boards_for_round_and_movement():
     bg = BoardGroupMovement(num_boards=7, num_tables=4)
-    r1 = bg.boards_for_round(1)
-    r2 = bg.boards_for_round(2)
+    r1 = bg.first_board_for_round(1)
+    r2 = bg.first_board_for_round(2)
     # every table key present
     assert set(r1.keys()) == {1,2,3,4}
     assert set(r2.keys()) == {1,2,3,4}

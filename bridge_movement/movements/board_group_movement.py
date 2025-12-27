@@ -50,7 +50,7 @@ class BoardGroupMovement:
             cur += sz
         return groups
 
-    def boards_for_round(self, round_index: int) -> Dict[int, int]:
+    def first_board_for_round(self, round_index: int) -> Dict[int, int]:
         """Return mapping table_index->board for given round_index (1-based rounds).
 
         Default behavior: for round r, the table i plays group index ((i-1 + (r-1)) % n_groups).
@@ -68,13 +68,27 @@ class BoardGroupMovement:
             out[i] = board
         return out
 
+    def boards_for_round(self, round_index: int) -> Dict[int, Tuple[int, ...]]:
+        """Return mapping table_index->boards for given round_index (1-based rounds).
+        """
+        if round_index < 1:
+            raise ValueError("round_index must be >= 1")
+        n = len(self.groups)
+        out: Dict[int, Tuple[int, ...]] = {}
+        for i in range(1, self.num_tables + 1):
+            group_idx = (i - 1 + (round_index - 1)) % n
+            group = self.groups[group_idx]
+            out[i] = group.boards
+        return out
+
+
     def board_movement_between(self, round_a: int, round_b: int) -> Dict[int, Tuple[int, int]]:
         """Return mapping board_number -> (from_table, to_table) between two rounds.
 
         If a board is not present on any table (e.g. groups shorter than num_tables), it will be omitted.
         """
-        a_map = self.boards_for_round(round_a)
-        b_map = self.boards_for_round(round_b)
+        a_map = self.first_board_for_round(round_a)
+        b_map = self.first_board_for_round(round_b)
         inv_a: Dict[int, int] = {b: t for t, b in a_map.items() if b is not None}
         inv_b: Dict[int, int] = {b: t for t, b in b_map.items() if b is not None}
         movement: Dict[int, Tuple[int, int]] = {}
