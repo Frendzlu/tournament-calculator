@@ -41,13 +41,13 @@ class BoardGroupMovement:
                 sizes += [0] * (self.num_tables - len(sizes))
         groups: List[BoardGroup] = []
         cur = 1
-        for sz in sizes:
-            if sz <= 0:
-                groups.append(BoardGroup(tuple()))
+        for idx in sizes:
+            if idx <= 0:
+                groups.append(BoardGroup(int, tuple()))
                 continue
-            boards = tuple(range(cur, cur + sz))
-            groups.append(BoardGroup(boards))
-            cur += sz
+            boards = tuple(range(cur, cur + idx))
+            groups.append(BoardGroup(idx, boards))
+            cur += idx
         return groups
 
     def first_board_for_round(self, round_index: int) -> Dict[int, int]:
@@ -81,6 +81,18 @@ class BoardGroupMovement:
             out[i] = group.boards
         return out
 
+    def board_group_id_for_round(self, round_index: int) -> Dict[int, int]:
+        """Return mapping table_index->board_group_id for given round_index (1-based rounds).
+        """
+        if round_index < 1:
+            raise ValueError("round_index must be >= 1")
+        n = len(self.groups)
+        out: Dict[int, int] = {}
+        for i in range(1, self.num_tables + 1):
+            group_idx = (i - 1 + (round_index - 1)) % n
+            group = self.groups[group_idx]
+            out[i] = group.BoardGroupId
+        return out
 #this should be returning Board group movements, not individual boards. Mateusz tell me what you think
     def board_movement_between(self, round_a: int, round_b: int) -> Dict[int, Tuple[int, int]]:
         """Return mapping board_number -> (from_table, to_table) between two rounds.
