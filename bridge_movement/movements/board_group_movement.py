@@ -83,7 +83,6 @@ class BoardGroupMovement:
             out[i] = group.boards
         return out
 
-#this does not work, look at it when you will have time Mateusz
     def board_group_ids_for_round(self, round_index: int) -> Dict[int, int]:
         """Return mapping table_index->board_group_id for given round_index (1-based rounds).
         """
@@ -96,7 +95,8 @@ class BoardGroupMovement:
             group = self.groups[group_idx]
             out[i] = group.BoardGroupId
         return out
-#this should be returning Board group movements, not individual boards. Mateusz tell me what you think
+
+
     def board_group_movement_between(self, round_a: int, round_b: int) -> Dict[int, Tuple[int, int]]:
         """Return mapping board_group_id -> (from_table, to_table) between two rounds.
 
