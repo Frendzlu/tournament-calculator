@@ -1,10 +1,10 @@
 from typing import Dict, Type, TYPE_CHECKING
 
 from .table import Table
-from bridge_movement.core import BoardGroup, Status
+from bridge_tc_library.structure.core import BoardGroup, Status
 
 if TYPE_CHECKING:
-    from bridge_movement.movements import BaseMovement
+    from bridge_tc_library.structure.movements import BaseMovement
 
 
 class Sector:

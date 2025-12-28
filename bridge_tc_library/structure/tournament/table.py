@@ -1,9 +1,9 @@
 from typing import Optional, TYPE_CHECKING
-from bridge_movement.core.status import Status
+from bridge_tc_library.structure.core.status import Status
 
 if TYPE_CHECKING:
     from .sector import Sector
-    from bridge_movement import Pair, Position, BoardGroup
+    from bridge_tc_library.structure.core import Pair, Position, BoardGroup
     
 
 class Table:

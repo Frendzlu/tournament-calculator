@@ -1,8 +1,8 @@
-from bridge_movement.movements.strategy import MovementStrategy
-from bridge_movement.core import Position, Pair, BoardGroup, Player
-from bridge_movement.movements.movement import BaseMovement
+from bridge_tc_library.structure.movements.strategy import MovementStrategy
+from bridge_tc_library.structure.core import Position, Pair, BoardGroup, Player
+from bridge_tc_library.structure.movements.movement import BaseMovement
 from typing import Dict
-from bridge_movement.tournament import Table, Sector
+from bridge_tc_library.structure.tournament import Table, Sector
 
 
 if __name__ == '__main__':

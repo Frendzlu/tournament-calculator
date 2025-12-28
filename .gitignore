@@ -1,9 +1,9 @@
-bridge_movement.egg-info
+bridge_tc_library.egg-info
 .idea
-bridge_movement/.idea
-bridge_movement/.venv
-bridge_movement/__pycache__/*
-bridge_movement/core/__pycache__/*
-bridge_movement/movements/__pycache__/*
-bridge_movement/tests/__pycache__/*
+bridge_tc_library/.idea
+bridge_tc_library/.venv
+bridge_tc_library/__pycache__/*
+bridge_tc_library/core/__pycache__/*
+bridge_tc_library/movements/__pycache__/*
+bridge_tc_library/tests/__pycache__/*
 *.pyc

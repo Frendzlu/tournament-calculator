@@ -1,7 +1,7 @@
 from typing import List, Optional, Any, Tuple, Dict
 from abc import ABC, abstractmethod
 from .strategy import MovementStrategy
-from bridge_movement.core import Position
+from bridge_tc_library.structure.core import Position
 
 
 class MovementGenerator(ABC):

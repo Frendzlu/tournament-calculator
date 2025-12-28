@@ -1,7 +1,11 @@
 [project]
-name = "bridge_movement"
+name = "bridge-tc-library"
 version = "0.1.0"
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bridge_tc_library", "bridge_tc_library.*"]

@@ -1,8 +1,8 @@
 from typing import List, Tuple, TYPE_CHECKING
-from bridge_movement.core import Position
+from bridge_tc_library.structure.core import Position
 
 if TYPE_CHECKING:
-    from bridge_movement.tournament.table import Table
+    from bridge_tc_library.structure.tournament.table import Table
 
 class MovementStrategy:
     """
