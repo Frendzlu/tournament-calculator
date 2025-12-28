@@ -4,6 +4,7 @@ from bridge_tc_library.structure.movements.movement import BaseMovement
 from typing import Dict
 from bridge_tc_library.structure.tournament import Table, Sector
 
+from bridge_tc_library.structure.movements import howell
 
 if __name__ == '__main__':
     # Example usage of BaseMovement with MovementStrategy
@@ -37,9 +38,10 @@ if __name__ == '__main__':
     movement = BaseMovement(tables=tables, board_groups=board_groups, pairs=pairs, movement_strategies=movement_strategy)
 
     # Example: Get sitting and boards for round 2
+    """
     sitting_round_2: Dict[Table, Dict[Position, Pair]] = movement.get_sitting_for_round(2)
     boards_round_2: Dict[Table, BoardGroup] = movement.get_boards_for_round(2)
-
+     
     print("Sitting for Round 2:")
     for table, positions in sitting_round_2.items():
         print(f"Table {table.table_id}: NS={positions[Position.NS]}, EW={positions[Position.EW]}")
@@ -47,4 +49,24 @@ if __name__ == '__main__':
     print("\nBoards for Round 2:")
     for table, board_group in boards_round_2.items():
         print(f"Table {table.table_id}: Board Group={board_group.name}")
+    """
+    """    print("get_strategy_for_round test:")
+    print("round 1 strategy:")
+    print(movement.movement_strategies.get_strategy_for_round(1))
+    print("round 2 strategy:")
+    print(movement.movement_strategies.get_strategy_for_round(2))
+    """
+    a = movement.movement_strategies.get_strategy_for_round(1)
+    print("first elements of the returned tuple: a[0][0]")
+    print(a[0][0])
+    print("first elements of the returned tuple: a[0][1]")
+    print(a[0][1])
+    print("first elements of the returned tuple: a[0][2]")
+    print(a[0][2])
+    print("first element of the first element of the returned tuple: a[0][0][0]")
+    t = a[0][0][0]
+    print(t)
 
+    initial = howell.HowellMovement(10)
+    print("Initial round map:")
+    print(initial.initial_round())

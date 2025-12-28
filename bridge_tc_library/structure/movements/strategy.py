@@ -36,6 +36,10 @@ class MovementStrategy:
         return self.strategies
     
     def get_strategy_for_round(self, round_number: int) -> Tuple[List[Tuple[Tuple['Table', Position], Tuple['Table', Position]]], List[Tuple['Table', 'Table']]]:
+        """
+        Returns the player and board change lists for a specific round. Round numbers start at 1.
+        Raises ValueError if no strategy is defined for the given round.
+        """
         for player_change_list, board_change_list, rounds in self.strategies:
             if round_number in rounds:
                 return player_change_list, board_change_list
