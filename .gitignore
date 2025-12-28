@@ -5,3 +5,5 @@ bridge_movement/.venv
 bridge_movement/__pycache__/*
 bridge_movement/core/__pycache__/*
 bridge_movement/movements/__pycache__/*
+bridge_movement/tests/__pycache__/*
+*.pyc
