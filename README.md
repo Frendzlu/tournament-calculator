@@ -13,7 +13,7 @@ Package layout (PEP 420 namespace package):
     - `movements/` — movement generators and strategies
     - `tournament/` — `Tournament`, `Sector`, `Table`, validation
 
-Notes about imports
+## Notes about imports
 
 - Because this project uses a namespace-style layout, import code should refer
   to subpackages explicitly. Example:
@@ -24,7 +24,7 @@ Notes about imports
   from bridge_tc_library.structure.movements import MovementStrategy
   ```
 
-Setup (recommended)
+## Setup (recommended)
 
 1. Create virtualenv and activate it:
 
@@ -59,13 +59,7 @@ scripts directly:
 PYTHONPATH=$(pwd) python bridge_tc_library/structure/examples/example_strategy.py
 ```
 
-Why this layout?
-
-- The namespace-style layout keeps the source organized while allowing
-  consumers to import the public subpackages directly. It avoids fragile
-  top-level re-exports and keeps the package surface explicit.
-
-Troubleshooting
+### Troubleshooting
 
 - If an import fails, ensure the editable install succeeded and that your
   venv is activated or `PYTHONPATH` includes the project root.
@@ -73,6 +67,6 @@ Troubleshooting
   `bridge_tc_library.<subpkg>` to avoid accidental reliance on previous
   re-export shims.
 
-Contact
+## Contact
 
 For questions or changes, update the repository or open an issue.

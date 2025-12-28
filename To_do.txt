@@ -1,6 +1,0 @@
-1.
-To consider:
-Kiedy mamy składnice na n>1 board_groups, w obecnym formacie mumimy stworzyć n składnic
-2.
-There is incompatibility between generator.py and movement.py on initial_sitting TYPE_CHECKING,
-I am making method in movement to check and convert that
