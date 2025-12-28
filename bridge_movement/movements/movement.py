@@ -32,7 +32,7 @@ class BaseMovement:
         """
         pass
 
-    def construct_movement(self, rounds: int) -> Dict[int, Dict['Table', Dict[Position, Pair], 'BoardGroup']]:
+    def construct_movement(self, rounds: int) -> Dict[int, Dict['Table', Tuple[Dict[Position, Pair], 'BoardGroup']]]:
         """
         Docstring for construct_movement
         

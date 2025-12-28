@@ -47,3 +47,4 @@ if __name__ == '__main__':
     print("\nBoards for Round 2:")
     for table, board_group in boards_round_2.items():
         print(f"Table {table.table_id}: Board Group={board_group.name}")
+

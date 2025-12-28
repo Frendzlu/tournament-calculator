@@ -5,17 +5,9 @@ from bridge_movement.core import Position
 
 
 class MovementGenerator(ABC):
-	"""
-	Common helper class for movement generators.
-	Podklasy powinny zaimplementować:
-	- initial_round() -> Dict[(table_index, 'NS'/'EW'), pair]
-	- step(round_map) -> next round map
-	"""
-	# annotate num_tables so static checkers know it exists on subclasses
 	num_tables: int
 
 	def __init__(self):
-		# subclasses must set self.num_tables
 		self._pair_rounds_cache: Optional[List[Dict[Tuple[int, str], Any]]] = None
 
 	@abstractmethod
@@ -28,7 +20,6 @@ class MovementGenerator(ABC):
 
 	@property
 	def pair_rounds(self) -> List[Dict[Tuple[int, str], Any]]:
-		# support subclasses that don't call super().__init__ by using getattr/setattr
 		if getattr(self, '_pair_rounds_cache', None) is None:
 			rounds: List[Dict[Tuple[int, str], Any]] = []
 			seen: List[Dict[Tuple[int, str], Any]] = []
