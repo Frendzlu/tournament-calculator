@@ -23,6 +23,13 @@ class BaseMovement:
         """
         {(table_name, position): Pair}
         """
+        self.out : Dict['Table', Dict[Position, Pair]] = {}
+        self.round_number = round_number
+        self.initial_sitting : Dict['Table', Dict[Position, Pair]] = {}  # Sitting at round 1
+        for i in range(round_number):
+            
+
+
         
         pass
 
@@ -32,7 +39,7 @@ class BaseMovement:
         """
         pass
 
-    def construct_movement(self, rounds: int) -> Dict[int, Dict['Table', Tuple[Dict[Position, Pair], 'BoardGroup']]]:
+    def construct_movement(self, rounds: int) -> Dict[int, Dict['Table', Dict[Position, Pair], 'BoardGroup']]:
         """
         Docstring for construct_movement
         
