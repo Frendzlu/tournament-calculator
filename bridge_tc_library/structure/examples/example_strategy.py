@@ -8,67 +8,44 @@ from bridge_tc_library.structure.movements import howell
 
 if __name__ == '__main__':
     # Example usage of BaseMovement with MovementStrategy
-    sector = Sector('Example Sector')
-    tables = [Table(i + 1, sector) for i in range(5)]  # 5 tables
-    pairs = [Pair(i + 1, (Player(f"Player {2*i+1}"), Player(f"Player {2*i+2}"))) for i in range(10)]  # 10 pairs
-    board_groups = [BoardGroup(i+1, list(range(i*2+1, i*2+3))) for i in range(5)]  # 5 board group with 2 boards each
+    sector = Sector('A')
+    tables = [Table(i + 1, sector) for i in range(6)]
+    tables[3].isplayable = False  # Make one table a storage table
+    tables[5].isplayable = False  # Make another table a storage table
 
+    pairs = [Pair(i + 1, (Player(f"Player {2*i+1}"), Player(f"Player {2*i+2}"))) for i in range(8)]
+    board_groups = [BoardGroup(i+1, list(range(i*3+1, i*3+4))) for i in range(7)]
+    ftables = [t for t in tables if t.isplayable]
 
-    # Define a simple movement strategy
-    movement_strategy = MovementStrategy([(
-        [((tables[0], Position.NS), (tables[0], Position.NS)), 
-         ((tables[0], Position.EW), (tables[1], Position.EW)),
-         ((tables[1], Position.NS), (tables[1], Position.NS)),
-         ((tables[1], Position.EW), (tables[2], Position.EW)),
-         ((tables[2], Position.NS), (tables[2], Position.NS)),
-         ((tables[2], Position.EW), (tables[3], Position.EW)),
-         ((tables[3], Position.NS), (tables[3], Position.NS)),
-         ((tables[3], Position.EW), (tables[4], Position.EW)),
-         ((tables[4], Position.NS), (tables[4], Position.NS)),
-         ((tables[4], Position.EW), (tables[0], Position.EW)),        
+    howell_7rounds_4tables = MovementStrategy([(
+        [((ftables[0], Position.EW), (ftables[3], Position.NS)),
+         ((ftables[3], Position.NS), (ftables[1], Position.NS)),
+         ((ftables[1], Position.NS), (ftables[1], Position.EW)),
+         ((ftables[1], Position.EW), (ftables[2], Position.NS)),
+         ((ftables[2], Position.NS), (ftables[3], Position.EW)),
+         ((ftables[2], Position.EW), (ftables[0], Position.EW)),
+         ((ftables[3], Position.EW), (ftables[2], Position.EW)),        
         ],
-        [(tables[0], tables[4]),
-         (tables[1], tables[0]),
-         (tables[2], tables[1]),
+        [(tables[0], tables[5]),
+         (tables[5], tables[4]),
+         (tables[4], tables[3]),
          (tables[3], tables[2]),
-         (tables[4], tables[3])],
-        [1, 2, 3, 4, 5]
+         (tables[2], tables[1]),
+         (tables[1], tables[0])],
+        [1, 2, 3, 4, 5, 6, 7]
     )])
 
-    movement = BaseMovement(tables=tables, board_groups=board_groups, pairs=pairs, movement_strategies=movement_strategy)
+    movement = BaseMovement(tables=tables, board_groups=board_groups, pairs=pairs, movement_strategies=howell_7rounds_4tables)
+    sector.set_movement(movement)
 
-    # Example: Get sitting and boards for round 2
-    """
-    sitting_round_2: Dict[Table, Dict[Position, Pair]] = movement.get_sitting_for_round(2)
-    boards_round_2: Dict[Table, BoardGroup] = movement.get_boards_for_round(2)
-     
-    print("Sitting for Round 2:")
-    for table, positions in sitting_round_2.items():
-        print(f"Table {table.table_id}: NS={positions[Position.NS]}, EW={positions[Position.EW]}")
-
-    print("\nBoards for Round 2:")
-    for table, board_group in boards_round_2.items():
-        print(f"Table {table.table_id}: Board Group={board_group.name}")
-    """
-    """    print("get_strategy_for_round test:")
-    print("round 1 strategy:")
-    print(movement.movement_strategies.get_strategy_for_round(1))
-    print("round 2 strategy:")
-    print(movement.movement_strategies.get_strategy_for_round(2))
-    """
     a = movement.movement_strategies.get_strategy_for_round(1)
-    print("first elements of the returned tuple: a[0][0]")
-    print(a[0][0])
-    print("first elements of the returned tuple: a[0][1]")
-    print(a[0][1])
-    print("first elements of the returned tuple: a[0][2]")
-    print(a[0][2])
-    print("first element of the first element of the returned tuple: a[0][0][0]")
-    t = a[0][0][0]
-    print(t)
-    print("looking at initial sitting:")
-    initial_sitting = movement.convert_initial_sitting()
-    print(initial_sitting)
-    """initial = howell.HowellMovement(10)
-    print("Initial round map:")
-    print(initial.initial_round())"""
+    movement.autogenerate_initial_sitting()
+    movement.autogenerate_initial_boardgroup_placement()
+    movement.construct_movement(3)
+    print(sector.get_sector_as_string_for_round(1))
+    print(sector.get_sector_as_string_for_round(2))
+    print(sector.get_sector_as_string_for_round(3))
+    sector.exclude_storage_tables_from_numbering()
+    print(sector.get_sector_as_string_for_round(1))
+    print(sector.get_sector_as_string_for_round(2))
+    print(sector.get_sector_as_string_for_round(3))

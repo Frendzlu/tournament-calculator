@@ -6,3 +6,6 @@ from .player import Player
 class Pair:
 	id: int
 	players: Tuple[Player, Player]
+
+	def __str__(self):
+		return str(self.id)

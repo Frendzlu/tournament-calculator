@@ -8,7 +8,8 @@ if TYPE_CHECKING:
 
 class Table:
     def __init__(self, table_id: int, sector: Optional['Sector'] = None, isplayable: bool = True) -> None:
-        self.table_id: int = table_id
+        self._table_id: int = table_id
+        self.display_id: int = table_id
         self.sector: Optional['Sector'] = sector
         self.og_sector: Optional['Sector'] = sector
         self.isplayable: bool = isplayable
@@ -19,6 +20,8 @@ class Table:
         self.status: Status = Status.INACTIVE
 
     def start(self, ns_pair: 'Pair', ew_pair: 'Pair', board_set: 'BoardGroup'):
+        if not self.isplayable:
+            raise ValueError("Cannot start a non-playable table.")
         self.current_round = 1
         self.current_pairs = {
             Position.NS: ns_pair,
@@ -37,10 +40,13 @@ class Table:
             self.current_board = self.current_board_set.boards[next_index]
 
     def __str__(self):
-        return f"Table {self.og_sector.name if self.og_sector else '_'}{self.table_id}"
+        if self.isplayable:
+            return f"{self.og_sector.name if self.og_sector else '_'}{self.display_id}"
+        else:
+            return f"_{self.og_sector.name if self.og_sector else '_'}{self.display_id}"
 
     def __repr__(self):
-        return f"<Table id={self.table_id} og_sector={self.og_sector.name if self.og_sector else '_'} sector={self.sector.name if self.sector else '_'} status={self.status.name} playable={self.isplayable}>"
+        return f"<Table _id={self._table_id} display_id={self.display_id} og_sector={self.og_sector.name if self.og_sector else '_'} sector={self.sector.name if self.sector else '_'} status={self.status.name} playable={self.isplayable}>"
     
     def change_sector(self, new_sector: Optional['Sector']):
         if self.og_sector is None:
