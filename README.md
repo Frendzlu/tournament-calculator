@@ -42,8 +42,14 @@ python -m venv .venv
 3. Optional: install test runner and run tests:
 
 ```bash
+# inside the project root with the venv activated
 .venv/bin/python -m pip install pytest
+# run all tests
 .venv/bin/python -m pytest -q
+
+# alternatively, using the configured python executable path
+/home/frendzel/bridge-tc-library/.venv/bin/python -m pip install pytest
+/home/frendzel/bridge-tc-library/.venv/bin/python -m pytest -q
 ```
 
 If you prefer not to install, set `PYTHONPATH` to the project root when running

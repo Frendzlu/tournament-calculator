@@ -7,9 +7,10 @@ if TYPE_CHECKING:
     
 
 class Table:
-    def __init__(self, table_id: int, sector: 'Sector', isplayable: bool = True) -> None:
+    def __init__(self, table_id: int, sector: Optional['Sector'] = None, isplayable: bool = True) -> None:
         self.table_id: int = table_id
-        self.sector: 'Sector' = sector
+        self.sector: Optional['Sector'] = sector
+        self.og_sector: Optional['Sector'] = sector
         self.isplayable: bool = isplayable
         self.current_round: Optional[int] = None
         self.current_pairs: Optional[dict['Position', 'Pair']] = None
@@ -34,3 +35,24 @@ class Table:
         if self.current_board_set.boards.index(self.current_board) + 1 > len(self.current_board_set.boards):
             next_index = self.current_board_set.boards.index(self.current_board) + 1
             self.current_board = self.current_board_set.boards[next_index]
+
+    def __str__(self):
+        return f"Table {self.og_sector.name if self.og_sector else '_'}{self.table_id}"
+
+    def __repr__(self):
+        return f"<Table id={self.table_id} og_sector={self.og_sector.name if self.og_sector else '_'} sector={self.sector.name if self.sector else '_'} status={self.status.name} playable={self.isplayable}>"
+    
+    def change_sector(self, new_sector: Optional['Sector']):
+        if self.og_sector is None:
+            self.og_sector = new_sector
+
+        old = self.sector
+        if old is new_sector:
+            return
+
+        if old is not None and self in old.tables:
+            old.tables.remove(self)
+
+        self.sector = new_sector
+        if new_sector is not None and self not in new_sector.tables:
+            new_sector.tables.append(self)

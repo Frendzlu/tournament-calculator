@@ -11,8 +11,8 @@ classifiers = [
 ]
 license = { text = "MIT" }
 authors = [
-	{ name = "Frendzel" }
-    { name = "HalfRedBeard" }
+	{ name = "Frendzel" },
+	{ name = "HalfRedBeard" },
 ]
 
 [project.urls]
