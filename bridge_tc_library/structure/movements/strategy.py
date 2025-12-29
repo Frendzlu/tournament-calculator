@@ -8,7 +8,7 @@ class MovementStrategy:
     """
     Movement strategy container.
 
-    Internally stores a list of 2-tuples: (player_change_list, board_change_list, rounds_list)
+    Internally stores a list of 3-tuples: (player_change_list, board_change_list, rounds_list)
     - player_change_list: list of tuples ((Table, Position), (Table, Position)) indicating pair moves (from, to)
     - board_change_list: list of tuples (Table, Table) indicating board moves (from, to)
     - rounds_list: list[int] specifying rounds when this change_list applies

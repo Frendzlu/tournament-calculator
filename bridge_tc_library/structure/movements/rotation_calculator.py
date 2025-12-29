@@ -4,8 +4,11 @@ from .strategy import MovementStrategy
 from bridge_tc_library.structure.core import Position
 
 
-class MovementGenerator(ABC):
+class RotationCalculator(ABC):
 	num_tables: int
+	"""
+	Abstract base class for rotation calculators.
+	"""
 
 	def __init__(self):
 		self._pair_rounds_cache: Optional[List[Dict[Tuple[int, str], Any]]] = None
@@ -82,3 +85,4 @@ class MovementGenerator(ABC):
 		# Apply same change_list to all rounds
 		rounds_list = list(range(1, n + 1))
 		return MovementStrategy([(changes, rounds_list)])
+

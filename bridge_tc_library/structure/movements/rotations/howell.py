@@ -1,9 +1,9 @@
 from collections import deque
 from typing import List, Dict, Tuple, Any
-from .generator import MovementGenerator
+from bridge_tc_library.structure.movements.rotation_calculator import RotationCalculator
 
 
-class HowellMovement(MovementGenerator):
+class HowellMovement(RotationCalculator):
 	"""
 	Standalone Howell movements generator inheriting shared helpers.
 	"""
@@ -14,7 +14,7 @@ class HowellMovement(MovementGenerator):
 			raise ValueError("num_pairs must be even")
 		self.num_pairs = num_pairs
 		self.num_tables = num_pairs // 2
-		# do not set pair_rounds here; MovementGenerator will compute them
+		# do not set pair_rounds here; RotationCalculator will compute them
 
 	def _wheel_base(self) -> List[str]:
 		pairs = [str(i + 1) for i in range(self.num_pairs)]
