@@ -1,9 +1,10 @@
 # python
 import importlib
 import inspect
-from typing import Dict, Type, Any, Optional
+from typing import Dict, Type, Any, List, Tuple
 
 from bridge_tc_library.structure import AbstractRotation
+from bridge_tc_library.structure.movements.abstract_rotation import RotationParams
 
 
 class RotationCalculator:
@@ -38,10 +39,18 @@ class RotationCalculator:
         """Returns the rotation class by its name, or None if not found."""
         return self.rotations.get(name)
 
-    def get_rotations(self, pairs: Optional[int] = None, boards_min: Optional[int] = None, boards_max: Optional[int] = None) -> \
-    list[str] | None:
-        """Returns a list of all available rotation names."""
-        if pairs is None and boards_min is None and boards_max is None:
-            return list(self.rotations.keys())
-        if pairs is not None:
-            raise NotImplementedError("Filtering by pairs is not implemented yet.")
+    def get_rotations(self, num_pairs: int, min_boards_amount: int, max_boards_amount: int, min_boards_per_boardgroup: int) -> List[Tuple[Type[AbstractRotation], RotationParams]]:
+        """
+        Returns a list of tuples containing the rotation class and possible rotation parameters.
+        Each tuple contains (RotationClass, RotationParams) where RotationParams has
+        (num_tables, num_board_groups, boards_per_board_group).
+        """
+        results: List[Tuple[Type[AbstractRotation], RotationParams]] = []
+        for cls in self.rotations.values():
+            if hasattr(cls, 'generate_possible_rotations'):
+                possible_rotations = cls.generate_possible_rotations(
+                    num_pairs, min_boards_amount, max_boards_amount, min_boards_per_boardgroup
+                )
+                for params in possible_rotations:
+                    results.append((cls, params))
+        return results

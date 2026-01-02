@@ -1,8 +1,18 @@
-from typing import List, Optional, Any, Tuple, Dict
+from typing import List, Optional, Any, Tuple, Dict, NamedTuple, TYPE_CHECKING
 from abc import ABC, abstractmethod
 from .strategy import MovementStrategy
 from bridge_tc_library.structure.core import Position
 from bridge_tc_library.structure.tournament import Table
+
+if TYPE_CHECKING:
+	from bridge_tc_library.structure.tournament import Table
+
+
+class RotationParams(NamedTuple):
+	"""Parameters describing a possible rotation configuration."""
+	num_tables: int
+	num_board_groups: int
+	boards_per_board_group: int
 
 
 class AbstractRotation(ABC):
@@ -11,27 +21,23 @@ class AbstractRotation(ABC):
 	Abstract base class for rotation calculators.
 	"""
 
-	def __init__(self):
+	def __init__(self, tables: List['Table']):
+		self.tables = tables
 		self._pair_rounds_cache: Optional[List[Dict[Tuple[int, str], Any]]] = None
-
+		
+	@classmethod
 	@abstractmethod
-	def check_if_can_handle(self, num_pairs: int, min_boards_amount: int, max_boards_amount: int, min_boards_per_boardgroup: int = 2) -> bool:
-		"""
-		Checks if the current rotation can handle the given number of pairs and boardgroups.
-		"""
-
-	@abstractmethod
-	def generate_possibile_rotations_draft(self, num_pairs: int, max_boards_amount: int) -> List[Tuple[int, int, int]]:
+	def generate_possible_rotations(cls, num_pairs: int, min_boards_amount: int, max_boards_amount: int, min_boards_per_boardgroup: int) -> List[RotationParams]:
 		"""
 		Generates possible rotation drafts.
 		This will generate a list of possible rotations in a draft format.
-		List of tuples: (Amount of rounds: int, Amount of boards: int, amount of boardgroup_sets: int)
+		List of RotationParams: (num_tables, num_board_groups, boards_per_board_group)
 		"""
 
 	@abstractmethod
-	def generate_strategy_for_rotation(self, num_pairs: int, num_rounds: int, num_boardgroup_sets: int, Tables: Tuple[Table], optional_arg: Optional[Any] = None) -> MovementStrategy:
+	def generate_strategy_for_rotation(self, rounds: int) -> MovementStrategy:
 		"""
-		Generates movement strategy for the given rotation parameters.
+		Generates movement strategy for the given number of rounds.
 		"""
 
 	def check_if_bye_needed(self, num_pairs: int) -> bool:

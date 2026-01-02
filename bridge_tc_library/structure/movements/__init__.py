@@ -4,9 +4,10 @@ except Exception:
     MovementStrategy = None  # type: ignore
 
 try:
-    from .abstract_rotation import AbstractRotation  # type: ignore
+    from .abstract_rotation import AbstractRotation, RotationParams  # type: ignore
 except Exception:
-    RotationCalculator = None  # type: ignore
+    AbstractRotation = None  # type: ignore
+    RotationParams = None  # type: ignore
 
 try:
     from .movement import BaseMovement  # type: ignore
@@ -15,7 +16,7 @@ except Exception:
 
 __all__ = [
     name for name in (
-        'MovementStrategy', 'RotationCalculator', 'BaseMovement'
+        'MovementStrategy', 'AbstractRotation', 'RotationParams', 'BaseMovement'
     ) if name in globals() and globals()[name] is not None
 ]
 
