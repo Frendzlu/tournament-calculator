@@ -21,7 +21,7 @@ class AbstractRotation(ABC):
 	Abstract base class for rotation calculators.
 	"""
 
-	def __init__(self, tables: List['Table']):
+	def __init__(self, tables: List['Table'], optionalint: Optional[int] = None):
 		self.tables = tables
 		self._pair_rounds_cache: Optional[List[Dict[Tuple[int, str], Any]]] = None
 		
