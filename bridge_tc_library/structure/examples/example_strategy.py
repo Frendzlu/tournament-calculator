@@ -4,8 +4,6 @@ from bridge_tc_library.structure.movements.movement import BaseMovement
 from typing import Dict
 from bridge_tc_library.structure.tournament import Table, Sector
 
-from bridge_tc_library.structure.movements import howell
-
 if __name__ == '__main__':
     # Example usage of BaseMovement with MovementStrategy
     sector = Sector('A')
@@ -49,3 +47,16 @@ if __name__ == '__main__':
     print(sector.get_sector_as_string_for_round(1))
     print(sector.get_sector_as_string_for_round(2))
     print(sector.get_sector_as_string_for_round(3))
+
+    print("range(5)")
+    for i in range(5):
+        print(i)
+    print("range(1,5)")
+    for i in range(1, 5):
+        print(i)
+    print("range(3,5)")
+    for i in range(3, 5):
+        print(i)
+    print("range(4,5)")
+    for i in range(4, 5):
+        print(i)
