@@ -14,7 +14,7 @@ class RotationAnalyzer:
     
     @staticmethod
     def get_rotations_dir() -> Path:
-        """Get the path to the rotations directory."""
+        """Get the path to the rotation directory."""
         return Path(__file__).parent
     
     @staticmethod
