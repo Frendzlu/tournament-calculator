@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-from typing import List, Dict, Tuple, Any
-
-from bridge_tc_library.structure import MovementStrategy
-from bridge_tc_library.structure.movements.abstract_rotation import AbstractRotation
-from bridge_tc_library.structure.core import Position
-from bridge_tc_library.structure.tournament import Table
-=======
 from collections import deque
 from typing import List, Dict, Tuple, Any, TYPE_CHECKING
 
@@ -14,7 +6,6 @@ from bridge_tc_library.structure.movements.abstract_rotation import AbstractRota
 
 if TYPE_CHECKING:
 	from bridge_tc_library.structure.tournament import Table
->>>>>>> 56e97a720447ccf7d4bdc916fcb070646c4ae7e2
 
 
 class MitchellMovement(AbstractRotation):
